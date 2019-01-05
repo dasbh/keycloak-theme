@@ -13,6 +13,8 @@ dependencies {
     compileOnly( "org.keycloak","keycloak-server-spi", keycloakVersion)
     compileOnly( "org.keycloak","keycloak-server-spi-private", keycloakVersion)
     compileOnly( "org.keycloak","keycloak-services", keycloakVersion)
+    compileOnly( "org.keycloak","keycloak-kerberos-federation", keycloakVersion)
+    compileOnly( "org.keycloak","keycloak-ldap-federation", keycloakVersion)
     testCompile("junit", "junit", "4.12")
 }
 

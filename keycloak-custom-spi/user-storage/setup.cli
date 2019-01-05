@@ -1,0 +1,19 @@
+echo using ${env.JBOSS_HOME}/standalone/configuration/standalone-ha.xml
+
+embed-server --server-config=standalone-ha.xml --std-out=echo
+
+echo SETUP: Begin Keycloak configuration...
+
+echo
+echo SETUP: Logging
+/subsystem=logging/logger=org.keycloak.custom.storage:add(category=org.keycloak.custom.storage, use-parent-handlers=true, level=DEBUG)
+
+echo
+echo SETUP: User Storage Provider
+
+# Add dedicated storage spi config element to allow configuring elements.
+/subsystem=keycloak-server/spi=storage:add()
+/subsystem=keycloak-server/spi=storage/provider=demo-user-provider:add(enabled=true)
+/subsystem=keycloak-server/spi=storage/provider=demo-user-provider:write-attribute(name=properties.someProperty,value=helloworld)
+
+echo SETUP: Completed
